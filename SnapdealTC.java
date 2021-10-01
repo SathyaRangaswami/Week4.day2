@@ -34,6 +34,7 @@ public class SnapdealTC {
 		driver.findElement(By.xpath("//div[text()='Training Shoes']")).click();
 		driver.findElement(By.xpath("//span[text()='Sort by:']")).click();
 	 driver.findElement(By.xpath("(//li[@class='search-li'])[1]")).click();
+	 Thread.sleep(2000);
 		List<WebElement> priceListSort = driver.findElements(By.xpath("//span[@class='lfloat product-price']"));
 		System.out.println("Size of Price list from low to high"+priceListSort.size());
 
@@ -46,18 +47,26 @@ public class SnapdealTC {
 			System.out.println("Price list from low to high: "+listPrice);
 			
 		
-		driver.findElement(By.name("fromVal")).sendKeys("900");
-		driver.findElement(By.name("toVal")).sendKeys("1200");
+		WebElement fromval = driver.findElement(By.name("fromVal"));
+		fromval.clear();
+		fromval.sendKeys("900");
+		WebElement toval = driver.findElement(By.name("toVal"));
+		toval.clear();
+		toval.sendKeys("1200");
 		driver.findElement(By.xpath("//div[@class='price-go-arrow btn btn-line btn-theme-secondary']")).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//label[@for='Color_s-Navy']")).click();
+//driver.findElement(By.xpath("//label[@for='Color_s-White']")).click();
 		List<WebElement> snapFilter = driver.findElements(By.xpath("//div[@class='filters']/div/a"));
 		for (WebElement eachitem : snapFilter) {
 			String fil = eachitem.getText();
 			System.out.println("filters from snap"+fil);			
 		}
+		Thread.sleep(2000);
 		WebElement shoe = driver.findElement(By.xpath("//p[@class='product-title']"));
 		Actions builder=new Actions(driver);
 		builder.moveToElement(shoe).perform();
+		
 		driver.findElement(By.xpath("//div[contains(@class,'center quick-view-bar')]")).click();
 		String text2 = driver.findElement(By.xpath("//span[@class='payBlkBig']")).getText();
 		System.out.println("Price of the shoe : " + text2);
